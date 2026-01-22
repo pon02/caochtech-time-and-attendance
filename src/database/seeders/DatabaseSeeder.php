@@ -11,16 +11,14 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $this->call([
-            ConditionSeeder::class,
-            CategorySeeder::class,
-            PaymentSeeder::class,
+            RoleSeeder::class,
             UserSeeder::class,
-            ItemSeeder::class,
+            AttendanceSeeder::class,
+            AttendanceBreakSeeder::class,
+            AttendanceChangeRequestSeeder::class,
         ]);
-
-        // \App\Models\User::factory(10)->create();
     }
 }
