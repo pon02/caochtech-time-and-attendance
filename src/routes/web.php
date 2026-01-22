@@ -40,7 +40,7 @@ Route::post('/admin/logout', function (Request $request) {
 // ========================================
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/attendance', [AttendanceController::class, 'show'])->name('attendance.time_record');
-    Route::post('/attendance/stamp', [AttendanceController::class, 'stamp'])->name('attendance.stamp');
+    Route::post('/attendance', [AttendanceController::class, 'stamp'])->name('attendance.stamp');
 
     Route::get('/attendance/list', [AttendanceController::class, 'index'])->name('attendance.index');
 
