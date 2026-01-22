@@ -1,0 +1,139 @@
+.attendance-table {
+    width: 100%;
+    align-self: center;
+    border-radius: 10px;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    margin: 0 auto;
+    background: #fff;
+}
+.attendance-table th {
+    width: 100px;
+    border-bottom: 3px solid #E1E1E1;
+    padding: 12px 8px;
+    text-align: center;
+}
+
+.attendance-table th:first-child {
+    width: 120px;
+}
+
+.attendance-table td {
+    border-bottom: 2px solid #E1E1E1;
+    padding: 12px 8px;
+    text-align: center;
+}
+
+.attendance-table th:last-child,
+.attendance-table td:last-child {
+    border-right: none;
+}
+.attendance-table tr:last-child td {
+    border-bottom: none;
+}
+
+.month-selector {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 0 16px;
+    margin-bottom: 24px;
+    gap: 12px;
+}
+
+.month-btn {
+    background: none;
+    border: none;
+    border-radius: 0;
+    padding: 0 8px;
+    cursor: pointer;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: none;
+    text-decoration: none;
+}
+
+.arrow-img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    vertical-align: middle;
+    margin-right: 4px;
+    filter: grayscale(1) brightness(0.5) sepia(1) hue-rotate(160deg) saturate(4) contrast(1.2);
+}
+.arrow-img.right {
+    transform: scaleX(-1);
+    margin-left: 4px;
+    margin-right: 0;
+}
+
+.calendar-label {
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    gap: 6px;
+}
+.calendar-label .calendar-icon {
+    width: 26px;
+    height: 26px;
+    margin-right: 4px;
+}
+.calendar-label .month-input {
+    position: absolute;
+    left: -24px;
+    top: 0px;
+    width: 48px;
+    height: 48px;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2;
+}
+.calendar-label .month-display {
+    margin-left: 8px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.month-display {
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 0;
+}
+
+.csv-export-btn {
+    width: 184px;
+    height: 50px;
+    border-radius: 5px;
+    background: #000;
+    color: #FFF;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.15em;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    line-height: 50px;
+    margin-top: 16px;
+}
+
+.csv-export-btn:hover {
+    opacity: 0.85;
+}
+
+.attendance-table-wrap {
+    position: relative;
+}
+
+.csv-btn-area {
+    position: absolute;
+    right: 0;
+    bottom: -70px;
+}

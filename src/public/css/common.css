@@ -103,6 +103,7 @@
 
 body {
     font-family: 'Inter', sans-serif;
+    background: #F0EFF2;
 }
 
 .alert {
@@ -195,4 +196,50 @@ body {
         padding: 10px 15px;
         font-size: 13px;
     }
+}
+.attendance-body {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 40px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.section-title {
+    display: flex;
+    align-self: flex-start;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.section-title__bar {
+    display: inline-block;
+    width: 8px;
+    height: 32px;
+    background: #000;
+    margin-right: 12px;
+    border-radius: 4px;
+}
+
+.section-title__text {
+    font-size: 30px;
+    font-weight: bold;
+    color: #000;
+}
+
+.text-gray {
+    color: #737373;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    letter-spacing: 0.15em;
+}
+
+.text-black {
+    color: #000;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    letter-spacing: 0.15em;
 }

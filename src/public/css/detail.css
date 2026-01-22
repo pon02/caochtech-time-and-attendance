@@ -1,0 +1,141 @@
+.align-left {
+    text-align: left;
+}
+
+.date-flex-align {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    margin: 0 15px;
+}
+
+.date-year {
+    min-width: 103px;
+    text-align: center;
+    margin-right: 110px;
+}
+
+.date-md {
+    min-width: 103px;
+    text-align: center;
+}
+
+.input-pair {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.detail-input {
+    width: 103px;
+    height: 30px;
+    border-radius: 4px;
+    border: 1px solid #E1E1E1;
+    padding: 0 8px;
+    margin: 0 4px;
+    background: #fff;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.input-sep {
+    margin: 0 42px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
+    letter-spacing: 0.1em;
+}
+
+.align-input {
+    margin-left: 0;
+    display: inline-block;
+    min-width: 103px;
+    max-width: 600px;
+}
+
+.detail-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    margin-bottom: 32px;
+}
+
+.detail-table th {
+    width: 300px;
+    text-align: left;
+    padding: 20px 40px;
+    border-bottom: 2px solid #E1E1E1;
+    background: #fff;
+}
+
+.detail-table td {
+    padding: 12px 16px;
+    border-bottom: 2px solid #E1E1E1;
+    background: #fff;
+}
+
+.detail-note-input {
+    width: 63%;
+    min-width: 240px;
+    max-width: 600px;
+    height: 80px;
+    border: 1px solid #E1E1E1;
+    border-radius: 4px;
+    padding: 8px 12px;
+    box-sizing: border-box;
+    resize: none;
+    margin: 0;
+}
+
+.detail-btn-area {
+    display: flex;
+    justify-content: flex-end;
+}
+.detail-update-btn {
+    width: 130px;
+    height: 50px;
+    border-radius: 5px;
+    background: #000;
+    color: #fff;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.15em;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.detail-update-btn:hover {
+    background: #333;
+}
+
+.approved-bg,
+.detail-update-btn:disabled {
+    background-color: #696969;
+    cursor: not-allowed;
+    pointer-events: none;
+    box-shadow: none;
+}
+
+.input-readonly {
+    background: none;
+    border: none;
+    color: #000;
+    pointer-events: none;
+    box-shadow: none;
+}
+
+.pending-msg {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    color: #FF000080;
+    display: inline-block;
+    margin-top: 8px;
+}
+
+.error-message {
+    color: #FF0000;
+    font-size: 11px;
+    margin-top: 8px;
+}

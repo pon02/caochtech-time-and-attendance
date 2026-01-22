@@ -1,0 +1,53 @@
+.tab-area {
+    width: 900px;
+    margin: 0 auto 20px auto;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #000;
+    letter-spacing: 0.15em;
+    font-weight: 400;
+    margin: 0 100px 0 50px;
+    padding: 8px 0 12px 0;
+    cursor: pointer;
+    transition: font-weight 0.2s;
+}
+
+.tab-btn.active {
+    font-weight: 700;
+}
+
+.tab-area::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 900px;
+    height: 1px;
+    background: #000;
+    z-index: 0;
+}
+
+.no-letter-spacing {
+    letter-spacing: 0;
+}
+
+.attendance-table tbody tr .reason-left-align {
+    text-align: left;
+    padding-left: 30px;
+}
+
+.attendance-table {
+    width: 900px;
+    margin-top: 32px;
+    margin-left: auto;
+    margin-right: auto;
+}
