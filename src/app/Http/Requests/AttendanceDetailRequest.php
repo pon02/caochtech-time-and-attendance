@@ -46,23 +46,56 @@ class AttendanceDetailRequest extends FormRequest
             $in = $this->input('after_attendance.clock_in_at');
             $out = $this->input('after_attendance.clock_out_at');
             if ($in && $out) {
-                $inTime = Carbon::parse($in);
-                $outTime = Carbon::parse($out);
+                try {
+                    $inTime = Carbon::createFromFormat('H:i', $in);
+                    $outTime = Carbon::createFromFormat('H:i', $out);
+                } catch (\Throwable $e) {
+                    return;
+                }
+
                 if ($inTime->gte($outTime)) {
                     $validator->errors()->add('after_attendance.clock_in_at', '出勤時間もしくは退勤時間が不適切な値です');
                 }
                 $breaks = $this->input('after_breaks', []);
                 foreach ($breaks as $i => $break) {
-                    if (!empty($break['start_at'])) {
-                        $bStart = Carbon::parse($break['start_at']);
-                        if ($bStart->lt($inTime) || $bStart->gt($outTime)) {
-                            $validator->errors()->add('after_breaks.'.$i.'.start_at', '休憩時間が不適切な値です');
+                    $startRaw = $break['start_at'] ?? null;
+                    $endRaw = $break['end_at'] ?? null;
+
+                    $hasStart = !empty($startRaw);
+                    $hasEnd = !empty($endRaw);
+
+                    // どちらか片方だけの入力は不可
+                    if ($hasStart xor $hasEnd) {
+                        $validator->errors()->add('after_breaks.' . $i . '.start_at', '休憩時間が不適切な値です');
+                        continue;
+                    }
+
+                    $bStart = null;
+                    $bEnd = null;
+                    if ($hasStart && $hasEnd) {
+                        try {
+                            $bStart = Carbon::createFromFormat('H:i', $startRaw);
+                            $bEnd = Carbon::createFromFormat('H:i', $endRaw);
+                        } catch (\Throwable $e) {
+                            continue;
+                        }
+
+                        // 休憩開始が休憩終了より遅いのは不可
+                        if ($bStart->gt($bEnd)) {
+                            $validator->errors()->add('after_breaks.' . $i . '.start_at', '休憩時間が不適切な値です');
+                            continue;
                         }
                     }
-                    if (!empty($break['end_at'])) {
-                        $bEnd = Carbon::parse($break['end_at']);
+
+                    if ($bStart !== null) {
+                        if ($bStart->lt($inTime) || $bStart->gt($outTime)) {
+                            $validator->errors()->add('after_breaks.' . $i . '.start_at', '休憩時間が不適切な値です');
+                        }
+                    }
+
+                    if ($bEnd !== null) {
                         if ($bEnd->gt($outTime)) {
-                            $validator->errors()->add('after_breaks.'.$i.'.end_at', '休憩時間もしくは退勤時間が不適切な値です');
+                            $validator->errors()->add('after_breaks.' . $i . '.end_at', '休憩時間もしくは退勤時間が不適切な値です');
                         }
                     }
                 }
