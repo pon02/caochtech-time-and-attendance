@@ -2,9 +2,9 @@
 
 use App\Providers\RouteServiceProvider;
 use Laravel\Fortify\Features;
+use App\Actions\Fortify\LoginResponse;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Fortify Guard
@@ -75,6 +75,20 @@ return [
     */
 
     'home' => RouteServiceProvider::HOME,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Redirects
+    |--------------------------------------------------------------------------
+    |
+    | Here you may configure where users are redirected after authentication
+    | / logout.
+    |
+    */
+
+    'redirects' => [
+        'logout' => '/login',
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -156,4 +170,5 @@ return [
         // ]),
     ],
 
+    'login_response' => LoginResponse::class,
 ];

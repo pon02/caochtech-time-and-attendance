@@ -17,6 +17,7 @@ use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Contracts\RegisterResponse;
 use Laravel\Fortify\Contracts\VerifyEmailResponse;
+use Laravel\Fortify\Contracts\LoginResponse;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -42,27 +43,49 @@ class FortifyServiceProvider extends ServiceProvider
             return view('auth.register');
         });
 
+        // ログインビュー分岐
         Fortify::loginView(function() {
+            if (request()->is('admin/login')) {
+                return view('auth.admin_login');
+            }
             return view('auth.login');
         });
 
-        // カスタムログインバリデーション
+        // 管理者ログインURLの場合はrole_id=1のみ許可、それ以外はrole_id問わず認証
         Fortify::authenticateUsing(function (Request $request) {
             try {
-                // LoginRequestでバリデーション実行
                 $loginRequest = app(LoginRequest::class);
                 $loginRequest->merge($request->all());
                 $validated = $loginRequest->validated();
-
                 $user = User::where('email', $validated['email'])->first();
-
-                if ($user && Hash::check($validated['password'], $user->password)) {
+                if ($user && \Illuminate\Support\Facades\Hash::check($validated['password'], $user->password)) {
+                    if (request()->is('admin/login') && $user->role_id != 1) {
+                        return null;
+                    }
                     return $user;
                 }
-
                 return null;
             } catch (\Illuminate\Validation\ValidationException $e) {
                 throw $e;
+            }
+        });
+
+        $this->app->instance(LoginResponse::class, new class implements LoginResponse {
+            public function toResponse($request)
+            {
+                $user = auth()->user();
+                // 管理者ログイン画面からのログイン
+                if (request()->is('admin/login')) {
+                    if ($user && $user->role_id == 1) {
+                        session(['is_admin_login' => true]);
+                        return redirect('/admin/attendance/list');
+                    }
+                    // 管理者以外は一般ページへ
+                    session()->forget('is_admin_login');
+                    return redirect('/admin/login');
+                }
+                session()->forget('is_admin_login');
+                return redirect('/attendance');
             }
         });
 
@@ -82,12 +105,11 @@ class FortifyServiceProvider extends ServiceProvider
         $this->app->instance(VerifyEmailResponse::class, new class implements VerifyEmailResponse {
             public function toResponse($request)
             {
-                // 初回プロフィール設定フラグを設定
                 session(['first_time_profile_setup' => true]);
 
                 return $request->wantsJson()
                     ? response()->json(['status' => 'Email verified successfully'])
-                    : redirect()->route('mypage.profile')->with('status', 'メール認証が完了しました');
+                    : redirect()->route('attendance.time_record')->with('status', 'メール認証が完了しました');
             }
         });
 

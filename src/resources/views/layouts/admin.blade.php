@@ -16,29 +16,29 @@
     <div class="header__container">
         <div class="header-utilities">
             <div class="header__logo">
-                <a href="{{ route('attendance.time_record') }}">
+                <a href="{{ url('/admin/attendance/list') }}">
                     <img src="{{ asset('/img/logo.svg') }}" alt="coachtechロゴ">
                 </a>
             </div>
             <nav class="header__nav">
                 <ul class="nav__list">
                     <li class="nav__item">
-                        <a href="{{ route('attendance.time_record') }}" class="nav__text">勤怠</a>
+                        <a href="{{ route('admin.attendance.index') }}" class="nav__text">勤怠一覧</a>
                     </li>
                     <li class="nav__item">
-                        <a href="{{ route('attendance.index') }}" class="nav__text">勤怠一覧</a>
+                        <a href="{{ route('admin.staff.index') }}" class="nav__text">スタッフ一覧</a>
                     </li>
                     <li class="nav__item">
-                        <a href="{{ route('stamp_correction_request.list') }}" class="nav__text">申請</a>
+                        <a href="{{ route('stamp_correction_request.list') }}" class="nav__text">申請一覧</a>
                     </li>
                     <li class="nav__item">
                         @auth
-                            <form action="{{ url('/logout') }}" method="POST" class="logout-form">
+                            <form action="{{ route('admin.logout') }}" method="POST" class="logout-form">
                                 @csrf
                                 <button type="submit" class="nav__text">ログアウト</button>
                             </form>
                         @else
-                            <a href="{{ route('login') }}" class="nav__text">ログイン</a>
+                            <a href="{{ route('admin.login') }}" class="nav__text">ログイン</a>
                         @endauth
                     </li>
                 </ul>
