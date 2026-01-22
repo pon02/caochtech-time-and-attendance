@@ -20,11 +20,9 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'name',
         'email',
+        'email_verified_at',
         'password',
-        'postal_code',
-        'address',
-        'building',
-        'profile_image',
+        'role_id',
     ];
 
     /**
@@ -47,42 +45,34 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * ユーザーと商品の1対多リレーション（出品者）
-     */
-    public function items()
+     * ユーザーと役割のリレーションシップ
+     **/
+    public function role()
     {
-        return $this->hasMany(Item::class);
+        return $this->belongsTo(Role::class);
     }
 
     /**
-     * ユーザーと注文の1対多リレーション（購入者）
+     * ユーザーと出勤情報の1対多リレーション
      */
-    public function orders()
+    public function attendances()
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Attendance::class);
     }
 
     /**
-     * ユーザーがいいねした商品（多対多リレーション）
+     * ユーザーと出勤変更申請の1対多リレーション（申請者）
      */
-    public function likedItems()
+    public function attendanceChangeRequestsAsRequester()
     {
-        return $this->belongsToMany(Item::class, 'likes', 'user_id', 'item_id')->withTimestamps();
+        return $this->hasMany(AttendanceChangeRequest::class, 'requester_user_id');
     }
 
     /**
-     * ユーザーのいいね（1対多リレーション）
+     * ユーザーと出勤変更申請の1対多リレーション（承認者）
      */
-    public function likes()
+    public function attendanceChangeRequestsAsReviewer()
     {
-        return $this->hasMany(Like::class);
-    }
-
-    /**
-     * ユーザーのコメント（1対多リレーション）
-     */
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(AttendanceChangeRequest::class, 'reviewer_user_id');
     }
 }
