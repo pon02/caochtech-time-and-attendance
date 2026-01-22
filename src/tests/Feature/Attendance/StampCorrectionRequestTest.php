@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
-class StumpCorrectionRequestTest extends TestCase
+class StampCorrectionRequestTest extends TestCase
 {
 	use RefreshDatabase;
 
@@ -278,4 +278,3 @@ class StumpCorrectionRequestTest extends TestCase
 			->assertSee('勤怠詳細');
 	}
 }
-

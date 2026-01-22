@@ -11,7 +11,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
-class AdminStumpCorrectionRequestTest extends TestCase
+class AdminStampCorrectionRequestTest extends TestCase
 {
 	use RefreshDatabase;
 
@@ -258,4 +258,3 @@ class AdminStumpCorrectionRequestTest extends TestCase
 		$this->assertSame('2026-01-20 12:40:00', Carbon::parse($break->end_at)->toDateTimeString());
 	}
 }
-
