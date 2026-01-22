@@ -51,9 +51,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // role_id=1 かつ セッションadmin_loginフラグがtrueのときのみ管理者画面
         $user = $request->user();
         if ($user && (int)$user->role_id === 1 && session('is_admin_login') === true) {
-            return app(\App\Http\Controllers\AdminAttendanceController::class)->stampCorrectionRequestList($request);
+            return app(AdminAttendanceController::class)->stampCorrectionRequestList($request);
         } else {
-            return app(\App\Http\Controllers\StampCorrectionRequestController::class)->index($request);
+            return app(StampCorrectionRequestController::class)->index($request);
         }
     })->name('stamp_correction_request.list');
     Route::post('/stamp_correction_request', [StampCorrectionRequestController::class, 'store'])
