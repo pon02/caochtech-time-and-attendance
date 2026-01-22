@@ -13,9 +13,7 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
-        // テスト用のシーダーを実行
-        $this->seed(\Database\Seeders\ConditionSeeder::class);
-        $this->seed(\Database\Seeders\CategorySeeder::class);
-        $this->seed(\Database\Seeders\PaymentSeeder::class);
+        // テスト用のデータを投入（DatabaseSeeder が実行される）
+        $this->seed();
     }
 }

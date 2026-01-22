@@ -27,7 +27,7 @@ class RegisterTest extends TestCase
         return $this->post('/register', array_merge($defaults, $data));
     }
 
-    /** 1. 会員登録機能 */
+    /** 1. 認証機能(一般ユーザー) */
     /** 1-1. 名前が入力されていない場合、バリデーションメッセージが表示される */
     public function test_register_name_validation(): void
     {

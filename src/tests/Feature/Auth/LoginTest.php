@@ -25,7 +25,7 @@ class LoginTest extends TestCase
         return $this->post('/login', array_merge($defaults, $data));
     }
 
-    /** 2.ログイン機能 & 3.ログアウト機能 */
+    /** 2.ログイン機能(一般ユーザー) & 3.ログイン機能(管理者) */
     /** 2-1. メールアドレスが入力されていない場合、バリデーションメッセージが表示される */
     public function test_login_email_validation(): void
     {
@@ -62,20 +62,51 @@ class LoginTest extends TestCase
         ]);
 
         $this->submitLogin()
-             ->assertRedirect('/');
+             ->assertRedirect('/attendance');
 
         $this->assertAuthenticatedAs($user);
     }
 
-    /** 3-1. ログアウトができる */
+    /** ログアウトができる */
     public function test_logout(): void
     {
         $user = User::factory()->create();
 
         $this->actingAs($user)
              ->post('/logout')
-             ->assertRedirect('/');
+               ->assertRedirect('/login');
 
         $this->assertGuest();
+    }
+
+    /** 3-1.管理者ログインでメールアドレスが未入力の場合、バリデーションメッセージが表示される */
+    public function test_admin_login_email_validation(): void
+    {
+        $this->get('/admin/login')->assertOk();
+
+        $this->post('/admin/login', [
+            'email' => '',
+            'password' => 'password123',
+        ])->assertSessionHasErrors(['email' => 'メールアドレスを入力してください']);
+    }
+
+    /** 3-2.管理者ログインでパスワードが未入力の場合、バリデーションメッセージが表示される */
+    public function test_admin_login_password_validation(): void
+    {
+        $this->get('/admin/login')->assertOk();
+        $this->post('/admin/login', [
+            'email' => '',
+            'password' => '',
+        ])->assertSessionHasErrors(['password' => 'パスワードを入力してください']);
+    }
+
+    /** 3-3.管理者ログインで入力情報が間違っている場合、バリデーションメッセージが表示される */
+    public function test_admin_login_invalid_credentials(): void
+    {
+        $this->get('/admin/login')->assertOk();
+        $this->post('/admin/login', [
+            'email' => 'invalid@example.com',
+            'password' => 'wrongpassword',
+        ])->assertSessionHasErrors(['email' => 'ログイン情報が登録されていません']);
     }
 }

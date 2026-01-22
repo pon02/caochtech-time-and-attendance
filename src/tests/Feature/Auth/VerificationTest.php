@@ -60,7 +60,7 @@ class VerificationTest extends TestCase
         }
     }
 
-    /** 16-3. メール認証サイトのメール認証を完了すると、プロフィール設定画面に遷移する */
+    /** 16-3. メール認証サイトのメール認証を完了すると、勤怠登録画面に遷移する */
     public function test_redirects_to_profile(): void
     {
         $user = User::factory()->create(['email_verified_at' => null]);
@@ -73,12 +73,7 @@ class VerificationTest extends TestCase
 
         $this->actingAs($user)
              ->get($verificationUrl)
-             ->assertRedirect(route('mypage.profile'));
-
-        $this->followingRedirects()
-             ->get($verificationUrl)
-             ->assertOk()
-             ->assertSee('プロフィール設定');
+             ->assertRedirect(route('attendance.time_record'));
 
         $this->assertTrue($user->fresh()->hasVerifiedEmail());
     }
