@@ -29,4 +29,12 @@ class AttendanceAudit extends Model
     {
         return $this->belongsTo(Attendance::class);
     }
+
+    /**
+     * 勤怠監査ログと操作ユーザーの多対1リレーション
+     */
+    public function actorUser()
+    {
+        return $this->belongsTo(User::class, 'actor_user_id');
+    }
 }

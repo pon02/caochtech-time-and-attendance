@@ -35,4 +35,20 @@ class Attendance extends Model
     {
         return $this->hasMany(AttendanceBreak::class);
     }
+
+    /**
+     * 出勤情報と勤怠変更申請の1対多リレーション
+     */
+    public function changeRequests()
+    {
+        return $this->hasMany(AttendanceChangeRequest::class);
+    }
+
+    /**
+     * 出勤情報と勤怠監査ログの1対多リレーション
+     */
+    public function audits()
+    {
+        return $this->hasMany(AttendanceAudit::class);
+    }
 }

@@ -25,7 +25,7 @@ class AttendanceChangeRequestPayload extends Model
     ];
 
     /**
-     * 勤怠変更申請ペイロードと勤怠変更申請の多対1リレーション
+     * 勤怠変更申請ペイロードと勤怠変更申請の1対1リレーション（逆側）
      */
     public function attendanceChangeRequest()
     {

@@ -53,7 +53,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * ユーザーと出勤情報の1対多リレーション
+     * ユーザーと勤怠情報の1対多リレーション
      */
     public function attendances()
     {
@@ -61,7 +61,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * ユーザーと出勤変更申請の1対多リレーション（申請者）
+     * ユーザーと勤怠変更申請の1対多リレーション（申請者）
      */
     public function attendanceChangeRequestsAsRequester()
     {
@@ -69,7 +69,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * ユーザーと出勤変更申請の1対多リレーション（承認者）
+     * ユーザーと勤怠変更申請の1対多リレーション（承認者）
      */
     public function attendanceChangeRequestsAsReviewer()
     {

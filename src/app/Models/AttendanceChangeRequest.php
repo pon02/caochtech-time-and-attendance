@@ -40,9 +40,9 @@ class AttendanceChangeRequest extends Model
     /**
      * 勤怠変更申請と承認者ユーザーの多対1リレーション
      */
-    public function approverUser()
+    public function reviewerUser()
     {
-        return $this->belongsTo(User::class, 'approver_user_id');
+        return $this->belongsTo(User::class, 'reviewer_user_id');
     }
 
     /**
