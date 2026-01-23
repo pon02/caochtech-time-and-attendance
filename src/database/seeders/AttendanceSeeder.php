@@ -14,7 +14,7 @@ class AttendanceSeeder extends Seeder
     public function run(): void
     {
         $start = Carbon::create(2025, 11, 1)->startOfDay();
-        $end   = Carbon::create(2026,  1, 31)->endOfDay();
+        $end   = Carbon::create(2026,  1, 23)->endOfDay();
 
         $calendar = new AttendanceCalendar();
         $gen = app(AttendanceDemoGenerator::class);

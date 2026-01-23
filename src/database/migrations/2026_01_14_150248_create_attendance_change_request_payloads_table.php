@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('attendance_change_request_payloads', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('attendance_change_request_id')->unique();
+            $table->unsignedBigInteger('attendance_change_request_id')->unique('acr_payloads_acr_id_unique');
             $table->foreign('attendance_change_request_id', 'acr_payloads_acr_id_fk')
                 ->references('id')
                 ->on('attendance_change_requests')
